@@ -27,7 +27,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Mahasiswa/Form', []);
     }
 
     /**
@@ -38,7 +38,19 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            "nama" => ['required'],
+            "nim" => ['required'],
+            "telp" => ['required'],
+            "jenis_kelamin" => ['required'],
+            "umur" => ['required', 'numeric'],
+            "tanggal_lahir" => ['required', 'date'],
+            "alamat" => ['required'],
+        ]);
+
+        Mahasiswa::create($input);
+
+        return redirect()->route('mahasiswa.index');
     }
 
     /**

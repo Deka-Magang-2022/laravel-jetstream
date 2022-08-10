@@ -18,9 +18,15 @@ const form = useForm({
 });
 
 const simpan = () => {
-    form.put(route('mahasiswa.update', props.mahasiswa), {
-        preserveScroll: true,
-    });
+    if (props.mahasiswa) {
+        form.put(route('mahasiswa.update', props.mahasiswa), {
+            preserveScroll: true,
+        });
+    }else{
+        form.post(route('mahasiswa.store'), {
+            preserveScroll: true,
+        });
+    }
 }
 
 </script>
@@ -71,6 +77,11 @@ const simpan = () => {
                             <label for="tanggal_lahir">tanggal_lahir</label>
                             <input id="tanggal_lahir" type="date" v-model="form.tanggal_lahir">
                             <label v-show="form.errors.tanggal_lahir" class="text-red-500" for="tanggal_lahir">{{ form.errors.tanggal_lahir }}</label>
+                        </div>
+                        <div class="grid grid-col-2">
+                            <label for="alamat">alamat</label>
+                            <input id="alamat" type="text" v-model="form.alamat">
+                            <label v-show="form.errors.alamat" class="text-red-500" for="alamat">{{ form.errors.alamat }}</label>
                         </div>
 
                         <div>
